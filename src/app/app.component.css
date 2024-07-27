@@ -1,0 +1,15 @@
+.container{
+    display: flex;
+    margin-top:8vh;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    vertical-align: middle;
+    align-items: center;
+}
+.container img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background:rgb(74, 138, 194)
+}
