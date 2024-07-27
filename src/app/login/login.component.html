@@ -1,0 +1,25 @@
+<div>
+    <div *ngIf="isSignDivVisible">
+      <h2>Sign Up</h2>
+      <form (ngSubmit)="onRegister()">
+        <input type="text" [(ngModel)]="signUpObj.name" name="name" placeholder="Nom complet" required>
+        <input type="email" [(ngModel)]="signUpObj.email" name="email" placeholder="E-mail" required>
+        <input type="password" [(ngModel)]="signUpObj.password" name="password" placeholder="Mot de passe" required>
+        <button type="submit">Enregistrer</button>
+      </form>
+    </div>
+  <h2>lll</h2>
+    <div *ngIf="!isSignDivVisible">
+      <h2>Login</h2>
+      <form (ngSubmit)="onLogin()">
+        <input type="email" [(ngModel)]="loginObj.email" name="email" placeholder="E-mail" required>
+        <input type="password" [(ngModel)]="loginObj.password" name="password" placeholder="Mot de passe" required>
+        <button type="submit">Se connecter</button>
+      </form>
+    </div>
+  
+    <button (click)="isSignDivVisible = !isSignDivVisible">
+      {{ isSignDivVisible ? 'Se connecter' : 'Créer un compte' }}
+    </button>
+  </div>
+  
