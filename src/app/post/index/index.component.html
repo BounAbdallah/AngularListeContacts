@@ -1,55 +1,55 @@
 <div class="container">
 
-    <h1>Angular 17 CRUD Example - ItSolutionStuff.com</h1>
+  <h1>Angular 17 CRUD Example - ItSolutionStuff.com</h1>
+
+  
+
+  <a href="#" routerLink="/post/create/" class="btn btn-success">Create New Post</a>
 
     
 
-    <a href="#" routerLink="/post/create/" class="btn btn-success">Create New Post</a>
+  <table class="table table-striped">
 
-      
+      <thead>
 
-    <table class="table table-striped">
+            <tr>
 
-        <thead>
+              <th>ID</th>
 
-              <tr>
+              <th>Title</th>
 
-                <th>ID</th>
+              <th>Body</th>
 
-                <th>Title</th>
+              <th width="250px">Action</th>
 
-                <th>Body</th>
+            </tr>
 
-                <th width="250px">Action</th>
+      </thead>
 
-              </tr>
+      <tbody>
 
-        </thead>
+            <tr *ngFor="let post of posts">
 
-        <tbody>
+              <td>{{ post.id }}</td>
 
-              <tr *ngFor="let post of posts">
+              <td>{{ post.title }}</td>
 
-                <td>{{ post.id }}</td>
+              <td>{{ post.body }}</td>
 
-                <td>{{ post.title }}</td>
+              <td>
 
-                <td>{{ post.body }}</td>
+                <a href="#" [routerLink]="['/post/', post.id, 'view']" class="btn btn-info">View</a>
 
-                <td>
+                <a href="#" [routerLink]="['/post/', post.id, 'edit']" class="btn btn-primary">Edit</a>
 
-                  <a href="#" [routerLink]="['/post/', post.id, 'view']" class="btn btn-info">View</a>
+                <button type="button" (click)="deletePost(post.id)" class="btn btn-danger">Delete</button>
 
-                  <a href="#" [routerLink]="['/post/', post.id, 'edit']" class="btn btn-primary">Edit</a>
+              </td>
 
-                  <button type="button" (click)="deletePost(post.id)" class="btn btn-danger">Delete</button>
+            </tr>
 
-                </td>
+      </tbody>
 
-              </tr>
+  </table>
 
-        </tbody>
-
-    </table>
-
- </div>
+</div>
