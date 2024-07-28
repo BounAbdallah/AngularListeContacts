@@ -1,6 +1,5 @@
+//src/app/app.routes.ts
 import { Routes } from '@angular/router';
-
-  
 
 import { IndexComponent } from './post/index/index.component';
 
