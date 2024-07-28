@@ -1,85 +1,33 @@
-import { Component } from '@angular/core';
-
-  
-
-import { PostService } from '../post.service';
-
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import { PostService } from '../post.service';
 import { Post } from '../post';
 
-  
-
 @Component({
-
   selector: 'app-view',
-
-  standalone: true,
-
-  imports: [],
-
   templateUrl: './view.component.html',
-
-  styleUrl: './view.component.css'
-
+  styleUrls: ['./view.component.css'] // Assurez-vous que le chemin est correct
 })
-
-export class ViewComponent {
-
-  
-
+export class ViewComponent implements OnInit {
   id!: number;
-
-  post!: Post;
-
-      
-
-  /*------------------------------------------
-
-  --------------------------------------------
-
-  Created constructor
-
-  --------------------------------------------
-
-  --------------------------------------------*/
+  post: Post | undefined;
+  postLoaded: boolean = false;
 
   constructor(
-
     public postService: PostService,
-
     private route: ActivatedRoute,
-
     private router: Router
-
-   ) { }
-
-      
-
-  /**
-
-   * Write code on Method
-
-   *
-
-   * @return response()
-
-   */
+  ) { }
 
   ngOnInit(): void {
-
     this.id = this.route.snapshot.params['postId'];
-
-          
-
-    this.postService.find(this.id).subscribe((data: Post)=>{
-
+    this.postService.find(this.id).subscribe((data: Post | undefined) => {
       this.post = data;
-
+      this.postLoaded = true;
     });
-
   }
 
-  
-
+  isPostDefined(): boolean {
+    return this.post !== undefined && this.post.body !== undefined;
+  }
 }

@@ -1,143 +1,53 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-  
-
-import { PostService } from '../post.service';
-
 import { ActivatedRoute, Router } from '@angular/router';
-
-import { Post } from '../post';
-
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 
-  
-
 @Component({
-
   selector: 'app-edit',
-
   standalone: true,
-
   imports: [CommonModule, ReactiveFormsModule],
-
   templateUrl: './edit.component.html',
-
-  styleUrl: './edit.component.css'
-
+  styleUrls: ['./edit.component.css']
 })
-
-export class EditComponent {
-
-  
+export class EditComponent implements OnInit {
 
   id!: number;
-
-  post!: Post;
-
+  post!: any; // Define the type according to your needs
   form!: FormGroup;
 
-      
-
-  /*------------------------------------------
-
-  --------------------------------------------
-
-  Created constructor
-
-  --------------------------------------------
-
-  --------------------------------------------*/
-
-  constructor(
-
-    public postService: PostService,
-
-    private route: ActivatedRoute,
-
-    private router: Router
-
-  ) { }
-
-      
-
-  /**
-
-   * Write code on Method
-
-   *
-
-   * @return response()
-
-   */
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+    this.id = +this.route.snapshot.params['postId'];
 
-    this.id = this.route.snapshot.params['postId'];
-
-    this.postService.find(this.id).subscribe((data: Post)=>{
-
-      this.post = data;
-
-    }); 
-
-        
+    const existingPosts = JSON.parse(localStorage.getItem('posts') || '[]');
+    this.post = existingPosts.find((p: any) => p.id === this.id);
 
     this.form = new FormGroup({
-
-      title: new FormControl('', [Validators.required]),
-
-      body: new FormControl('', Validators.required)
-
+      name: new FormControl(this.post?.name || '', [Validators.required]),
+      surname: new FormControl(this.post?.surname || '', [Validators.required]),
+      email: new FormControl(this.post?.email || '', [Validators.required, Validators.email]),
+      contact: new FormControl(this.post?.contact || '', [Validators.required])
     });
-
   }
 
-      
-
-  /**
-
-   * Write code on Method
-
-   *
-
-   * @return response()
-
-   */
-
-  get f(){
-
+  get f() {
     return this.form.controls;
-
   }
 
-      
+  submit() {
+    if (this.form.valid) {
+      const updatedPost = this.form.value;
+      const existingPosts = JSON.parse(localStorage.getItem('posts') || '[]');
+      const index = existingPosts.findIndex((p: any) => p.id === this.id);
 
-  /**
-
-   * Write code on Method
-
-   *
-
-   * @return response()
-
-   */
-
-  submit(){
-
-    console.log(this.form.value);
-
-    this.postService.update(this.id, this.form.value).subscribe((res:any) => {
-
-         console.log('Post updated successfully!');
-
-         this.router.navigateByUrl('post/index');
-
-    })
-
+      if (index !== -1) {
+        existingPosts[index] = { ...existingPosts[index], ...updatedPost };
+        localStorage.setItem('posts', JSON.stringify(existingPosts));
+        console.log('Post updated successfully!');
+        this.router.navigateByUrl('/post/index');
+      }
+    }
   }
-
-  
-
 }

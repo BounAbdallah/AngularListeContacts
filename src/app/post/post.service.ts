@@ -1,233 +1,41 @@
-import { Injectable } from '@angular/core';
-
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-     
-
-import {  Observable, throwError } from 'rxjs';
-
-import { catchError } from 'rxjs/operators';
-
-  
-
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Post } from './post';
-
-  
+import { map } from 'rxjs/operators';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
-
   providedIn: 'root'
-
 })
-
 export class PostService {
 
-  
-
-  private apiURL = "https://jsonplaceholder.typicode.com";
-
-    
-
-  /*------------------------------------------
-
-  --------------------------------------------
-
-  Http Header Options
-
-  --------------------------------------------
-
-  --------------------------------------------*/
-
-  httpOptions = {
-
-    headers: new HttpHeaders({
-
-      'Content-Type': 'application/json'
-
-    })
-
-  }
-
-   
-
-  /*------------------------------------------
-
-  --------------------------------------------
-
-  Created constructor
-
-  --------------------------------------------
-
-  --------------------------------------------*/
-
-  constructor(private httpClient: HttpClient) { }
-
-    
-
-  /**
-
-   * Write code on Method
-
-   *
-
-   * @return response()
-
-   */
-
-  getAll(): Observable<any> {
-
-  
-
-    return this.httpClient.get(this.apiURL + '/posts/')
-
-  
-
-    .pipe(
-
-      catchError(this.errorHandler)
-
-    )
-
-  }
-
-    
-
-  /**
-
-   * Write code on Method
-
-   *
-
-   * @return response()
-
-   */
-
-  create(post:Post): Observable<any> {
-
-  
-
-    return this.httpClient.post(this.apiURL + '/posts/', JSON.stringify(post), this.httpOptions)
-
-  
-
-    .pipe(
-
-      catchError(this.errorHandler)
-
-    )
-
-  }  
-
-    
-
-  /**
-
-   * Write code on Method
-
-   *
-
-   * @return response()
-
-   */
-
-  find(id:number): Observable<any> {
-
-  
-
-    return this.httpClient.get(this.apiURL + '/posts/' + id)
-
-  
-
-    .pipe(
-
-      catchError(this.errorHandler)
-
-    )
-
-  }
-
-    
-
-  /**
-
-   * Write code on Method
-
-   *
-
-   * @return response()
-
-   */
-
-  update(id:number, post:Post): Observable<any> {
-
-  
-
-    return this.httpClient.put(this.apiURL + '/posts/' + id, JSON.stringify(post), this.httpOptions)
-
- 
-
-    .pipe( 
-
-      catchError(this.errorHandler)
-
-    )
-
-  }
-
-       
-
-  /**
-
-   * Write code on Method
-
-   *
-
-   * @return response()
-
-   */
-
-  delete(id:number){
-
-    return this.httpClient.delete(this.apiURL + '/posts/' + id, this.httpOptions)
-
-  
-
-    .pipe(
-
-      catchError(this.errorHandler)
-
-    )
-
-  }
-
-      
-
-  /** 
-
-   * Write code on Method
-
-   *
-
-   * @return response()
-
-   */
-
-  errorHandler(error:any) {
-
-    let errorMessage = '';
-
-    if(error.error instanceof ErrorEvent) {
-
-      errorMessage = error.error.message;
-
-    } else {
-
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-
+  private storageKey = 'posts';
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+
+  // Méthode pour obtenir tous les posts
+  getAll(): Observable<Post[]> {
+    if (isPlatformBrowser(this.platformId)) {
+      const storedPosts = localStorage.getItem(this.storageKey);
+      const posts = storedPosts ? JSON.parse(storedPosts) : [];
+      return of(posts); // Retourner un observable
     }
+    return of([]); // Retourner un tableau vide ou gérer autrement
+  }
 
-    return throwError(errorMessage);
+  // Méthode pour obtenir un seul post par ID
+  find(id: number): Observable<Post | undefined> {
+    return this.getAll().pipe(
+      map(postsArray => postsArray.find(post => post.id === id))
+    );
+  }
 
- }
-
+  // Méthode pour supprimer un post par ID
+  delete(id: number): void {
+    if (isPlatformBrowser(this.platformId)) {
+      let posts: Post[] = JSON.parse(localStorage.getItem(this.storageKey) || '[]');
+      posts = posts.filter((post: Post) => post.id !== id);
+      localStorage.setItem(this.storageKey, JSON.stringify(posts));
+    }
+  }
 }
