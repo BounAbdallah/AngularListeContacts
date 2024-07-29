@@ -11,5 +11,5 @@ import { LoginComponent } from "./login/login.component"; // Import LoginCompone
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'AngularListeContacts'; // Titre de l'application
+  newTitle = 'AngularListeContacts'; // Titre de l'application
 }
