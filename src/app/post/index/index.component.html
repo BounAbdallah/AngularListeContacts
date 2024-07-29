@@ -1,0 +1,9 @@
+<ul>
+    <li *ngFor="let contact of contacts">
+      {{ contact.nom }}
+      {{ contact.prenom }}
+      {{ contact.email }}
+      <a [routerLink]="['/details', contact.id]">{{ contact.nom }}</a>
+    </li>
+  </ul>
+  

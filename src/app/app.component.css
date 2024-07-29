@@ -1,3 +1,4 @@
+
 .container{
     display: flex;
     margin-top:8vh;
@@ -13,3 +14,21 @@
     border-radius: 50%;
     background:rgb(74, 138, 194)
 }
+
+nav {
+    background-color: #f8f9fa;
+    padding: 10px;
+  }
+  
+  nav a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  nav a.active {
+    font-weight: bold;
+    color: #0056b3;
+  }
+  
+
