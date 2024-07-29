@@ -1,0 +1,35 @@
+<div class="signUppage">
+    <img src="../../assets/images/3Dimglogin.png" alt="">
+   <div class="contenues">
+    <div *ngIf="isSignDivVisible">
+        <h2>Inscription</h2>
+        <form class="signUpForm" (ngSubmit)="onRegister()">
+          <input type="text" [(ngModel)]="signUpObj.name" name="name" placeholder="Nom complet" required>
+          <input type="email" [(ngModel)]="signUpObj.email" name="email" placeholder="E-mail" required>
+          <input type="password" [(ngModel)]="signUpObj.password" name="password" placeholder="Mot de passe" required>
+          <button type="submit" class="toggle-button">Enregistrer</button>
+        </form>
+      </div>
+  
+      <div *ngIf="!isSignDivVisible">
+        <h2>Connxion</h2>
+        <form class="signUpForm" (ngSubmit)="onLogin()">
+          <input type="email" [(ngModel)]="loginObj.email" name="email" placeholder="E-mail" required>
+          <input type="password" [(ngModel)]="loginObj.password" name="password" placeholder="Mot de passe" required>
+          <button type="submit" class="toggle-button">Se connecter</button>
+        </form>
+      </div>
+    <div class="btn">
+
+        <div class="button-container">
+            <button (click)="isSignDivVisible = !isSignDivVisible" class="toggle-button">
+              {{ isSignDivVisible ? 'Se connecter' : 'Créer un compte' }}
+            </button>
+          </div>
+          
+    </div>
+   </div>
+  </div>
+  
+
+  

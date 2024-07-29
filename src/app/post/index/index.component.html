@@ -1,14 +1,14 @@
 <div class="container">
-  <h1>Contacts</h1>
-  <a routerLink="/post/create" class="btn btn-primary">Créer un nouveau post</a>
+  <h1>Posts</h1>
+  <a routerLink="/post/create" class="btn btn-primary">Create New Post</a>
 
   <table class="table">
     <thead>
       <tr>
         <th>ID</th>
-        <th>Titre</th>
-        <th>Nom</th>
-        <th>Prénom</th>
+        <th>Title</th>
+        <th>Name</th>
+        <th>Surname</th>
         <th>Email</th>
         <th>Contact</th>
         <th>Actions</th>
@@ -23,9 +23,9 @@
         <td>{{ post.email }}</td>
         <td>{{ post.contact }}</td>
         <td>
-          <button (click)="deletePost(post.id)" class="btn btn-danger">Supprimer</button>
-          <a [routerLink]="['/post', post.id, 'view']" class="btn btn-info">Deatils</a>
-          <a [routerLink]="['/post', post.id, 'edit']" class="btn btn-warning">Modifier</a>
+          <button (click)="deletePost(post.id)" class="btn btn-danger">Delete</button>
+          <a [routerLink]="['/post', post.id, 'view']" class="btn btn-info">View</a>
+          <a [routerLink]="['/post', post.id, 'edit']" class="btn btn-warning">Edit</a>
         </td>
       </tr>
     </tbody>
