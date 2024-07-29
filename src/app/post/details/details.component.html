@@ -1,0 +1,14 @@
+<div class="contact-details">
+    <h1>Contact Details</h1>
+    <p><strong>Nom:</strong> {{ contact?.nom }}</p>
+    <p><strong>Prénom:</strong> {{ contact?.prenom }}</p>
+    <p><strong>Email:</strong> {{ contact?.email }}</p>
+    <p><strong>Téléphone:</strong> {{ contact?.telephone }}</p>
+    <p><strong>Description:</strong> {{ contact?.description }}</p>
+    <p><strong>Créé par:</strong> {{ contact?.createdBy }}</p>
+    <p><strong>Créé le:</strong> {{ contact?.createdAt }}</p>
+    
+    <button (click)="editContact()">Edit</button>
+    <button (click)="moveToTrash()">Trash</button>
+  </div>
+  

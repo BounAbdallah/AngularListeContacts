@@ -1,0 +1,11 @@
+<div class="trash">
+    <h1>Trashed Contacts</h1>
+    <ul>
+      <li *ngFor="let contact of trashedContacts">
+        {{ contact.nom }} {{ contact.prenom }}
+        <button (click)="restoreContact(contact.id)">Restore</button>
+        <button (click)="permanentlyDeleteContact(contact.id)">Delete Permanently</button>
+      </li>
+    </ul>
+  </div>
+  

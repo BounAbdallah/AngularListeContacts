@@ -1,0 +1,40 @@
+<div class="login-container">
+<nav>
+    <button (click)="onLogout()">Déconnexion</button>
+
+</nav>
+
+    <div *ngIf="isSignDivVisible">
+      <h2>Sign Up</h2>
+      <form (ngSubmit)="onRegister()">
+        <label for="name">Name:</label>
+        <input type="text" id="name" [(ngModel)]="signUpObj.name" name="name" required>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" [(ngModel)]="signUpObj.email" name="email" required>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" [(ngModel)]="signUpObj.password" name="password" required>
+        
+        <button type="submit">Register</button>
+      </form>
+    </div>
+    
+    <div *ngIf="!isSignDivVisible">
+      <h2>Login</h2>
+      <form (ngSubmit)="onLogin()">
+        <label for="login-email">Email:</label>
+        <input type="email" id="login-email" [(ngModel)]="loginObj.email" name="email" required>
+        
+        <label for="login-password">Password:</label>
+        <input type="password" id="login-password" [(ngModel)]="loginObj.password" name="password" required>
+        
+        <button type="submit">Login</button>
+      </form>
+    </div>
+    
+    <button (click)="isSignDivVisible = !isSignDivVisible">
+      {{ isSignDivVisible ? 'Switch to Login' : 'Switch to Register' }}
+    </button>
+  </div>
+  
