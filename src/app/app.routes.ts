@@ -8,18 +8,6 @@ import { LoginComponent } from './login/login.component';
 import { AddContactComponent } from './post/add-contact/add-contact.component';
 import { AuthGuard } from './auth.guard';
 
-<<<<<<< HEAD
-
-  
-
-export const routes: Routes = [
-
-      { path: 'post', redirectTo: 'post/index', pathMatch: 'full'},
-
-      
-
-  ];
-=======
 export const routes: Routes = [
   { path: '', component: IndexComponent, canActivate: [AuthGuard] },
   { path: 'edit/:id', component: EditComponent, canActivate: [AuthGuard] },
@@ -28,4 +16,4 @@ export const routes: Routes = [
   { path: 'details/:id', component: DetailsComponent, canActivate: [AuthGuard] },
   { path: 'trash', component: TrashComponent, canActivate: [AuthGuard] }
 ];
->>>>>>> master
+
