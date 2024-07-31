@@ -13,5 +13,6 @@ export const routes: Routes = [
   { path: 'add-contact', component: AddContactComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'details/:id', component: DetailsComponent, canActivate: [AuthGuard] },
-  { path: 'trash', component: TrashComponent, canActivate: [AuthGuard] }
+  { path: 'trash', component: TrashComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: '' } // Redirection des chemins non définis
 ];

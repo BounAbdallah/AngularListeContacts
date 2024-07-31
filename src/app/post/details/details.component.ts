@@ -36,6 +36,15 @@ export class DetailsComponent implements OnInit {
       this.router.navigate(['/trash']);
     }
   }
+
+  deleteContact() {
+    if (this.contact) {
+      let contacts: ContactModel[] = JSON.parse(localStorage.getItem('contacts') || '[]');
+      contacts = contacts.filter(contact => contact.id !== this.contact!.id);
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+      this.router.navigate(['/home']);
+    }
+  }
 }
 
 interface ContactModel {

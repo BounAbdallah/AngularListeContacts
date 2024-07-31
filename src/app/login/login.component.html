@@ -1,40 +1,48 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 <div class="login-container">
-<nav>
-    <button (click)="onLogout()">Déconnexion</button>
-
-</nav>
-
+    <h2>Connexion</h2>
     <div *ngIf="isSignDivVisible">
-      <h2>Sign Up</h2>
+      <h3>Inscription</h3>
       <form (ngSubmit)="onRegister()">
-        <label for="name">Name:</label>
-        <input type="text" id="name" [(ngModel)]="signUpObj.name" name="name" required>
-        
-        <label for="email">Email:</label>
-        <input type="email" id="email" [(ngModel)]="signUpObj.email" name="email" required>
-        
-        <label for="password">Password:</label>
-        <input type="password" id="password" [(ngModel)]="signUpObj.password" name="password" required>
-        
-        <button type="submit">Register</button>
+        <div class="form-group">
+          <label for="register-name">Nom</label>
+          <input type="text" id="register-name" [(ngModel)]="signUpObj.name" name="name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="register-email">Email</label>
+          <input type="email" id="register-email" [(ngModel)]="signUpObj.email" name="email" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="register-password">Mot de passe</label>
+          <input type="password" id="register-password" [(ngModel)]="signUpObj.password" name="password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">S'inscrire</button>
       </form>
     </div>
-    
+  
     <div *ngIf="!isSignDivVisible">
-      <h2>Login</h2>
+      <h3>Connexion</h3>
       <form (ngSubmit)="onLogin()">
-        <label for="login-email">Email:</label>
-        <input type="email" id="login-email" [(ngModel)]="loginObj.email" name="email" required>
-        
-        <label for="login-password">Password:</label>
-        <input type="password" id="login-password" [(ngModel)]="loginObj.password" name="password" required>
-        
-        <button type="submit">Login</button>
+        <div class="form-group">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" [(ngModel)]="loginObj.email" name="email" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Mot de passe</label>
+          <input type="password" id="login-password" [(ngModel)]="loginObj.password" name="password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Se connecter</button>
       </form>
     </div>
-    
-    <button (click)="isSignDivVisible = !isSignDivVisible">
-      {{ isSignDivVisible ? 'Switch to Login' : 'Switch to Register' }}
+  
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  
+    <button (click)="isSignDivVisible = !isSignDivVisible" class="btn btn-link">
+      {{ isSignDivVisible ? 'Déjà inscrit? Connectez-vous' : 'Pas encore inscrit? Inscrivez-vous' }}
     </button>
   </div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   

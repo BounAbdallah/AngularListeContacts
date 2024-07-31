@@ -48,7 +48,7 @@ export class EditComponent implements OnInit {
       contacts.push(this.contact);
     }
     localStorage.setItem('contacts', JSON.stringify(contacts));
-    this.router.navigateByUrl('/contacts');
+    this.router.navigateByUrl('/home');
   }
   
   goBack() {

@@ -1,40 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-add-contact',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './add-contact.component.html',
   styleUrls: ['./add-contact.component.css']
 })
-export class AddContactComponent {
-  contact: ContactModel = {
-    id: 0,
-    nom: '',
-    prenom: '',
-    email: '',
-    telephone: '',
-    etat: '',
-    createdAt: '',
-    createdBy: '',
-    updatedAt: '',
-    updatedBy: '',
-    description: ''
-  };
+export class AddContactComponent implements OnInit {
+  contactForm!: FormGroup;
 
-  constructor(private router: Router) {}
+  constructor(private fb: FormBuilder, private router: Router) {}
+
+  ngOnInit() {
+    this.contactForm = this.fb.group({
+      nom: ['', Validators.required],
+      prenom: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      telephone: ['', Validators.required],
+      etat: [''],
+      description: ['']
+    });
+  }
 
   saveContact() {
-    const contacts: ContactModel[] = JSON.parse(localStorage.getItem('contacts') || '[]');
-    this.contact.id = this.generateNewId(contacts);
-    this.contact.createdAt = new Date().toISOString();
-    this.contact.updatedAt = new Date().toISOString();
-    contacts.push(this.contact);
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-    this.router.navigateByUrl('/');
+    if (this.contactForm.valid) {
+      const contacts: ContactModel[] = JSON.parse(localStorage.getItem('contacts') || '[]');
+      const newContact: ContactModel = {
+        ...this.contactForm.value,
+        id: this.generateNewId(contacts),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        createdBy: '',
+        updatedBy: ''
+      };
+      contacts.push(newContact);
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+      this.router.navigateByUrl('/');
+    } else {
+      this.contactForm.markAllAsTouched();
+    }
   }
 
   private generateNewId(contacts: ContactModel[]): number {

@@ -14,10 +14,12 @@ export class LoginComponent {
   isSignDivVisible: boolean = true;
   signUpObj: SignUpModel = { name: '', email: '', password: '' };
   loginObj: LoginModel = { email: '', password: '' };
+  errorMessage: string | null = null;
 
   constructor(private router: Router) {}
 
   onRegister() {
+    this.errorMessage = null; // Réinitialiser le message d'erreur
     const users = this.loadUsers();
     const userExists = users.some(user => user.email === this.signUpObj.email);
     if (!userExists) {
@@ -26,25 +28,25 @@ export class LoginComponent {
       alert('Inscription réussie');
       this.signUpObj = { name: '', email: '', password: '' };
     } else {
-      alert('Utilisateur déjà existant');
+      this.errorMessage = 'Utilisateur déjà existant';
     }
   }
 
   onLogin() {
+    this.errorMessage = null; // Réinitialiser le message d'erreur
     const users = this.loadUsers();
     const user = users.find(user => user.email === this.loginObj.email && user.password === this.loginObj.password);
     if (user) {
-      alert('Utilisateur trouvé...');
       sessionStorage.setItem('loggedUser', JSON.stringify(user));
       this.router.navigateByUrl('/');
     } else {
-      alert('Aucun utilisateur trouvé');
+      this.errorMessage = 'Aucun utilisateur trouvé ou mot de passe incorrect';
     }
   }
 
   onLogout() {
     sessionStorage.removeItem('loggedUser');
-    this.router.navigateByUrl('/login'); // Redirige vers la page de connexion après déconnexion
+    this.router.navigateByUrl('/login');
   }
 
   private loadUsers(): SignUpModel[] {
