@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <ul>
     <li *ngFor="let contact of contacts">
       {{ contact.nom }}
@@ -7,3 +8,38 @@
     </li>
   </ul>
   
+=======
+<div class="container">
+  <h1>Contacts</h1>
+  <a routerLink="/post/create" class="btn btn-primary">Créer un nouveau post</a>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Titre</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let post of posts">
+        <td>{{ post.id }}</td>
+        <td>{{ post.title }}</td>
+        <td>{{ post.name }}</td>
+        <td>{{ post.surname }}</td>
+        <td>{{ post.email }}</td>
+        <td>{{ post.contact }}</td>
+        <td>
+          <button (click)="deletePost(post.id)" class="btn btn-danger">Supprimer</button>
+          <a [routerLink]="['/post', post.id, 'view']" class="btn btn-info">Deatils</a>
+          <a [routerLink]="['/post', post.id, 'edit']" class="btn btn-warning">Modifier</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+>>>>>>> 0af10822cc835c1c1481147c6464112f38472fb1
