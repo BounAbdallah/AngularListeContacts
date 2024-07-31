@@ -1,0 +1,51 @@
+.contact-details {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+.contact-details h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.contact-details p {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 10px 0;
+}
+
+.contact-details p strong {
+  color: #555;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  padding: 10px;
+  margin: 5px;
+}
+
+.icon-button:hover {
+  color: #007bff; /* Change to the color of your choice */
+}
+
+.btn-edit .fa {
+  color: #f0ad4e;
+}
+
+.btn-trash .fa {
+  color: #d9534f;
+}
+
+.btn-delete .fa {
+  color: #5bc0de;
+}

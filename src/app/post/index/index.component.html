@@ -1,30 +1,13 @@
-<<<<<<< HEAD
-<ul>
-    <li *ngFor="let contact of contacts">
-      {{ contact.nom }}
-      {{ contact.prenom }}
-      {{ contact.email }}
-      <a [routerLink]="['/details', contact.id]">{{ contact.nom }}</a>
-    </li>
-  </ul>
-  
-=======
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <div class="container">
-  <h1>Contacts</h1>
-  <a routerLink="/post/create" class="btn btn-primary">Créer un nouveau post</a>
-
+  <h1>Liste des contacts</h1>
+  <div class="banner">
+    <img src="https://img.freepik.com/vecteurs-libre/personnes-dessinees-main-parlant-au-telephone-illustration_23-2149850391.jpg?t=st=1722501506~exp=1722505106~hmac=a0f018cb52ba6e46acb7d4fa30ad544f6fb47ba1b27328c5629aec64823eb741&w=826" alt="Banner Image" class="banner-image">
+  </div>
+  <!-- Posts Table -->
   <table class="table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Titre</th>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>Email</th>
-        <th>Contact</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
+   
+     
     <tbody>
       <tr *ngFor="let post of posts">
         <td>{{ post.id }}</td>
@@ -34,12 +17,32 @@
         <td>{{ post.email }}</td>
         <td>{{ post.contact }}</td>
         <td>
-          <button (click)="deletePost(post.id)" class="btn btn-danger">Supprimer</button>
-          <a [routerLink]="['/post', post.id, 'view']" class="btn btn-info">Deatils</a>
-          <a [routerLink]="['/post', post.id, 'edit']" class="btn btn-warning">Modifier</a>
+          <button (click)="deletePost(post.id)" class="btn btn-danger">
+            <i class="fa fa-trash"></i>
+          </button>
+          <a [routerLink]="['/post', post.id, 'view']" class="btn btn-info">
+            <i class="fa fa-eye"></i>
+          </a>
+          <a [routerLink]="['/post', post.id, 'edit']" class="btn btn-warning">
+            <i class="fa fa-edit"></i>
+          </a>
         </td>
       </tr>
     </tbody>
   </table>
+
+  <!-- Contacts Cards -->
+  <div class="row">
+    <div class="col-md-4" *ngFor="let contact of contacts">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">{{ contact.nom }} {{ contact.prenom }}</h5>
+          <p class="card-text">Email: {{ contact.email }}</p>
+          <a [routerLink]="['/details', contact.id]" class="btn btn-primary">
+            <i class="fa fa-info-circle"></i> Détails
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
->>>>>>> 0af10822cc835c1c1481147c6464112f38472fb1

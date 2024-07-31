@@ -8,7 +8,13 @@
   <p><strong>Créé par:</strong> {{ contact?.createdBy }}</p>
   <p><strong>Créé le:</strong> {{ contact?.createdAt }}</p>
   
-  <button (click)="editContact()">Edit</button>
-  <button (click)="moveToTrash()">Trash</button>
-  <button (click)="deleteContact()">Delete</button>
+  <button class="icon-button btn-edit" (click)="editContact()">
+    <i class="fa fa-edit"></i>
+  </button>
+  <button class="icon-button btn-trash" (click)="moveToTrash()">
+    <i class="fa fa-trash"></i>
+  </button>
+  <button class="icon-button btn-delete" (click)="deleteContact()">
+    <i class="fa fa-times"></i>
+  </button>
 </div>

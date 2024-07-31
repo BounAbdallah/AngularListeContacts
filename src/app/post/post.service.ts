@@ -1,6 +1,6 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Post } from './post';
+import { Post } from './post'; // Assurez-vous que le chemin est correct
 import { map } from 'rxjs/operators';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -35,6 +35,15 @@ export class PostService {
     if (isPlatformBrowser(this.platformId)) {
       let posts: Post[] = JSON.parse(localStorage.getItem(this.storageKey) || '[]');
       posts = posts.filter((post: Post) => post.id !== id);
+      localStorage.setItem(this.storageKey, JSON.stringify(posts));
+    }
+  }
+
+  // Méthode pour mettre à jour un post
+  update(updatedPost: Post): void {
+    if (isPlatformBrowser(this.platformId)) {
+      let posts: Post[] = JSON.parse(localStorage.getItem(this.storageKey) || '[]');
+      posts = posts.map(post => post.id === updatedPost.id ? updatedPost : post);
       localStorage.setItem(this.storageKey, JSON.stringify(posts));
     }
   }

@@ -1,11 +1,11 @@
-// src/app/post/post.model.ts
+// src/app/post/post.ts
 export interface Post {
-    id: number;
-    title: string;
-    body: string;
-    name?: string; // Ajoutez cette propriété si elle est optionnelle
-    surname?: string; // Ajoutez cette propriété si elle est optionnelle
-    email?: string; // Ajoutez cette propriété si elle est optionnelle
-    contact?: string; // Ajoutez cette propriété si elle est optionnelle
-  }
-  
+  id: number;
+  title: string;
+  body: string;
+  name?: string;
+  surname?: string;
+  email?: string;
+  contact?: string;
+  etat?: string; // Assurez-vous que 'etat' est défini ici
+}
