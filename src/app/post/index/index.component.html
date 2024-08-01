@@ -1,13 +1,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <div class="container">
-  <h1>Liste des contacts</h1>
+  <h1 class="my-4 text-center">Liste des contacts</h1>
+  
+  <!-- Banner Image -->
   <div class="banner">
     <img src="https://img.freepik.com/vecteurs-libre/personnes-dessinees-main-parlant-au-telephone-illustration_23-2149850391.jpg?t=st=1722501506~exp=1722505106~hmac=a0f018cb52ba6e46acb7d4fa30ad544f6fb47ba1b27328c5629aec64823eb741&w=826" alt="Banner Image" class="banner-image">
   </div>
+  
   <!-- Posts Table -->
   <table class="table">
-   
-     
+    
     <tbody>
       <tr *ngFor="let post of posts">
         <td>{{ post.id }}</td>
@@ -32,9 +34,10 @@
   </table>
 
   <!-- Contacts Cards -->
-  <div class="row">
-    <div class="col-md-4" *ngFor="let contact of contacts">
-      <div class="card mb-4">
+  <div class="row mt-4">
+    <div class="col-md-4 mb-4" *ngFor="let contact of contacts">
+      <div class="card square-card">
+        <img src="https://img.freepik.com/vecteurs-libre/personnes-dessinees-main-parlant-au-telephone-illustration_23-2149872203.jpg?t=st=1722512062~exp=1722515662~hmac=3d5d1992f8b886f5a7e81c75366ce934fc52d72a1a4c67937839857249d024e0&w=826" class="card-img-top" alt="Contact Image">
         <div class="card-body">
           <h5 class="card-title">{{ contact.nom }} {{ contact.prenom }}</h5>
           <p class="card-text">Email: {{ contact.email }}</p>
